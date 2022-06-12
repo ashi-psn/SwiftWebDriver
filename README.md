@@ -1,6 +1,5 @@
 # SwiftWebDriver
-
-[![Docker Image CI](https://github.com/ashi-psn/SwiftWebDriver/actions/workflows/docker-image.yml/badge.svg)](https://github.com/ashi-psn/SwiftWebDriver/actions/workflows/docker-image.yml)
+[![Docker Image CI](https://github.com/ashi-psn/SwiftWebDriver/actions/workflows/main.yml/badge.svg)](https://github.com/ashi-psn/SwiftWebDriver/actions/workflows/main.yml)
 [![Release](https://img.shields.io/github/v/release/ashi-psn/SwiftWebDriver)](https://github.com/ashi-psn/SwiftWebDriver/releases/latest)
 [![Swift Compatibility](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fashi-psn%2FSwiftWebDriver%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/ashi-psn/SwiftWebDriver)
 [![Platform Compatibility](https://img.shields.io/endpoint?url=https://swiftpackageindex.com/api/packages/ashi-psn/SwiftWebDriver/badge?type=platforms)](https://swiftpackageindex.com/ashi-psn/SwiftWebDriver)
