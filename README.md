@@ -19,7 +19,7 @@ Add the following entry in your Package.swift to start using HTTPClient:
 
 and add dependency to your target:
 ```Swift
-.target(name: "MyApp", dependencies: [.product(name: "SwiftWebDriver", package: "swift-webdriver")]),
+.target(name: "MyApp", dependencies: [.product(name: "SwiftWebDriver", package: "SwiftWebDriver")]),
 
 ```
 
