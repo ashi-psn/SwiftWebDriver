@@ -14,12 +14,12 @@ Adding the dependency
 Add the following entry in your Package.swift to start using HTTPClient:
 
 ```swift
-.package(url: "https://github.com/ashipsn/SwiftWebDriver.git", from: "0.1.0")
+.package(url: "https://github.com/ashi-psn/SwiftWebDriver.git", from: "0.1.0")
 ```
 
 and add dependency to your target:
 ```Swift
-.target(name: "MyApp", dependencies: [.product(name: "SwiftWebDriver", package: "swift-webdriver")]),
+.target(name: "MyApp", dependencies: [.product(name: "SwiftWebDriver", package: "SwiftWebDriver")]),
 
 ```
 
