@@ -12,6 +12,10 @@ public typealias Args = String
 
 public struct ChromeOptions: StatableOpject {
     public let args: [Args]?
+    
+    public init (args: [Args]?) throws {
+        self.args = args
+    }
 }
 
 public extension Args {

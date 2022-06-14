@@ -1,6 +1,8 @@
-import SeleniumSwift
+import SwiftWebDriver
 
-print("Hello, world!")
+let chromeOption = try ChromeOptions(
+  args: [
+    Args(.headless),
+  ]
+)
 
-let chromeOption = ChromeOptions(
-let selenium = SeleniumSwift(browser: .chrome(options: ChromeOptions())

@@ -6,19 +6,16 @@ import PackageDescription
 let package = Package(
     name: "SeleniumSwiftExample",
     platforms: [
-        .macOS(.v10_12),
-        .iOS(.v13),
-        .tvOS(.v13),
-        .watchOS(.v6)
+        .macOS(.v12),
     ],
     dependencies: [
-        .package(name: "selenium-swift", path: "../")
+        .package(name: "SwiftWebDriver", path: "../")
     ],
     targets: [
         .executableTarget(
             name: "SeleniumSwiftExample",
             dependencies: [
-                .product(name: "SeleniumSwift", package: "selenium-swift")
+                .product(name: "SwiftWebDriver", package: "SwiftWebDriver")
             ]),
         .testTarget(
             name: "SeleniumSwiftExampleTests",
