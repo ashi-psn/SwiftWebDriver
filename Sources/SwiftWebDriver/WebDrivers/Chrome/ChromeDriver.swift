@@ -73,6 +73,7 @@ internal class ChromeDriver: Driver {
         return client.request(request)
     }
     
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     public func getNavigation() async throws -> GetNavigationResponse {
         return try await getNavigation().get()
     }
@@ -85,6 +86,7 @@ internal class ChromeDriver: Driver {
         return client.request(request)
     }
     
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     public func postNavigation(requestURL: String) async throws -> PostNavigationResponse {
         return try await postNavigation(requestURL: requestURL).get()
     }
@@ -97,6 +99,7 @@ internal class ChromeDriver: Driver {
         return client.request(request)
     }
     
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     public func postNavigationBack() async throws -> PostNavigationBackResponse {
         return try await postNavigationBack().get()
     }
@@ -109,6 +112,7 @@ internal class ChromeDriver: Driver {
         return client.request(request)
     }
     
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     public func postNavigationForward() async throws -> PostNavigationForwardResponse {
         return try await postNavigationForward().get()
     }
@@ -121,6 +125,7 @@ internal class ChromeDriver: Driver {
         return client.request(request)
     }
     
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     public func postNavigationRefresh() async throws -> PostNavigationRefreshResponse {
         return try await postNavigationRefresh().get()
     }
@@ -133,6 +138,7 @@ internal class ChromeDriver: Driver {
         return client.request(request)
     }
     
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     public func getNavigationTitle() async throws -> GetNavigationTitleResponse {
         return try await getNavigationTitle().get()
     }
@@ -145,6 +151,7 @@ internal class ChromeDriver: Driver {
         return client.request(request)
     }
     
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     public func postElement(locatorSelector: LocatorSelector) async throws -> PostElementResponse {
         return try await postElement(locatorSelector: locatorSelector)
     }
@@ -157,6 +164,7 @@ internal class ChromeDriver: Driver {
         return client.request(request)
     }
     
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     public func postElements(locatorSelector: LocatorSelector) async throws -> PostElementsResponse {
         return try await postElements(locatorSelector: locatorSelector)
     }
@@ -169,6 +177,7 @@ internal class ChromeDriver: Driver {
         return client.request(request)
     }
     
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     public func postElementByElementId(locatorSelector: LocatorSelector, elementId: String) async throws -> PostElementByIdResponse {
         return try await postElementByElementId(locatorSelector: locatorSelector, elementId: elementId)
     }
@@ -189,10 +198,12 @@ internal class ChromeDriver: Driver {
         return client.request(request)
     }
     
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     func postElementsByElementId(locatorSelector: LocatorSelector, elementId: String) async throws -> PostElementsByIdResponse {
         return try await postElementsByElementId(locatorSelector: locatorSelector, elementId: elementId)
     }
     
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     func getElementText(elementId: String) async throws -> GetElementTextResponse {
         return try await getElementText(elementId: elementId)
     }
@@ -205,6 +216,7 @@ internal class ChromeDriver: Driver {
         return client.request(request)
     }
     
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     func getElementName(elementId: String) async throws -> GetElementNameResponse {
         return try await getElementName(elementId: elementId)
     }
@@ -217,6 +229,7 @@ internal class ChromeDriver: Driver {
         return client.request(request)
     }
     
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     func findElement(_ locatorType: LocatorType) async throws -> Element {
         guard let sessionId = sessionId else {
             throw WebDriverError.sessionIdisNil
@@ -226,6 +239,7 @@ internal class ChromeDriver: Driver {
         return Element(baseURL: url, sessionId: sessionId, elementId: response.elementId)
     }
     
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     func findElements(_ locatorType: LocatorType) async throws -> Elements {
         guard let sessionId = sessionId else {
             throw WebDriverError.sessionIdisNil
@@ -237,6 +251,7 @@ internal class ChromeDriver: Driver {
         }
     }
     
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     func getScreenShot() async throws -> String {
         guard let sessionId = sessionId else {
             throw WebDriverError.sessionIdisNil
@@ -246,6 +261,7 @@ internal class ChromeDriver: Driver {
         return response.value
     }
     
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     func waitUntil(_ locatorType: LocatorType, retryCount: Int = 3, durationSeconds: Int = 1) async throws -> Bool {
         
         guard let sessionId = sessionId else {
