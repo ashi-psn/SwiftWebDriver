@@ -14,13 +14,13 @@ public struct ChromeOptions: StatableOpject {
     public let args: [Args]?
 }
 
-extension Args {
+public extension Args {
     
     init(_ args: Arguments) {
         self.init(describing: args)
     }
     
-    public enum Arguments: CustomStringConvertible, Codable {
+    enum Arguments: CustomStringConvertible, Codable {
         case headless
         case noSandbox
         case disableGPU
