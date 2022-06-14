@@ -10,7 +10,7 @@ import NIO
 import NIOHTTP1
 import AsyncHTTPClient
 
-internal class ChromeDriver: Driver {
+public class ChromeDriver: Driver {
     
     
     public typealias BrowserOption = ChromeOptions
@@ -23,12 +23,12 @@ internal class ChromeDriver: Driver {
     
     public var sessionId: String?
     
-    required init(driverURL url: URL, browserObject: ChromeOptions) {
+    public required init(driverURL url: URL, browserObject: ChromeOptions) {
         self.url = url
         self.browserObject = browserObject
     }
     
-    convenience init(driverURLString urlString: String = "http://localhost:4444", browserObject: ChromeOptions) throws{
+    public convenience init(driverURLString urlString: String = "http://localhost:4444", browserObject: ChromeOptions) throws{
         guard let url = URL(string: urlString) else {
             throw HTTPClientError.invalidURL
         }
@@ -230,7 +230,7 @@ internal class ChromeDriver: Driver {
     }
     
     @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-    func findElement(_ locatorType: LocatorType) async throws -> Element {
+    public func findElement(_ locatorType: LocatorType) async throws -> Element {
         guard let sessionId = sessionId else {
             throw WebDriverError.sessionIdisNil
         }
@@ -240,7 +240,7 @@ internal class ChromeDriver: Driver {
     }
     
     @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-    func findElements(_ locatorType: LocatorType) async throws -> Elements {
+    public func findElements(_ locatorType: LocatorType) async throws -> Elements {
         guard let sessionId = sessionId else {
             throw WebDriverError.sessionIdisNil
         }
@@ -252,7 +252,7 @@ internal class ChromeDriver: Driver {
     }
     
     @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-    func getScreenShot() async throws -> String {
+    public func getScreenShot() async throws -> String {
         guard let sessionId = sessionId else {
             throw WebDriverError.sessionIdisNil
         }
@@ -262,7 +262,7 @@ internal class ChromeDriver: Driver {
     }
     
     @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-    func waitUntil(_ locatorType: LocatorType, retryCount: Int = 3, durationSeconds: Int = 1) async throws -> Bool {
+    public func waitUntil(_ locatorType: LocatorType, retryCount: Int = 3, durationSeconds: Int = 1) async throws -> Bool {
         
         guard let sessionId = sessionId else {
             throw WebDriverError.sessionIdisNil

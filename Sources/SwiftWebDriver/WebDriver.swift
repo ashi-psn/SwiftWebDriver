@@ -15,7 +15,7 @@ public class WebDriver<T: Driver> {
     
     /// init webDriver
     /// - Parameter driver:Driver
-    required init(driver: T) {
+    public required init(driver: T) {
         self.driver = driver
     }
 
