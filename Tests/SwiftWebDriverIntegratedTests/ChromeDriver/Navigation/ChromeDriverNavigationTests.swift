@@ -13,11 +13,12 @@ class ChromeDriverNavigationTests: XCTestCase, WebPageTestable {
     
     var pageEndPoint: String = "awaitTestPage.html"
 
-    let chromeOption = ChromeOptions(args: [
+    let chromeOption = try! ChromeOptions(args: [
         Args(.headless),
     ])
 
-    func testGetNavigationTitle() async {
+    func testGetNavigationTitle() async throws {
+        
         guard let url = URL(string: webDriverURL) else {
             XCTFail()
             return
@@ -42,7 +43,7 @@ class ChromeDriverNavigationTests: XCTestCase, WebPageTestable {
 
         do {
             try await driver.start()
-            try await driver.navigateTo(url: testPageURLString)
+            try await driver.navigateTo(urlString: testPageURLString)
             let title = try await driver.navigationTitle()
             XCTAssertNotNil(title.value)
             XCTAssertEqual(title.value, "expect title")
@@ -76,7 +77,7 @@ class ChromeDriverNavigationTests: XCTestCase, WebPageTestable {
 
         do {
             try await driver.start()
-            try await driver.navigateTo(url: testPageURLString)
+            try await driver.navigateTo(urlString: testPageURLString)
 
             try await driver
                 .findElement(.css(.id("startButton")))

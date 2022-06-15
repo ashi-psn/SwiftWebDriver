@@ -12,11 +12,12 @@ class ChromeDriverElmentHandleTests: XCTestCase, WebPageTestable {
 
     var pageEndPoint: String = "elementHandleTestPage.html"
 
-    let chromeOption = ChromeOptions(args: [
+    let chromeOption = try! ChromeOptions(args: [
         Args(.headless),
     ])
 
     func testClickButtton() async {
+        
         guard let url = URL(string: webDriverURL) else {
             XCTFail()
             return
@@ -41,7 +42,7 @@ class ChromeDriverElmentHandleTests: XCTestCase, WebPageTestable {
 
         do {
             try await driver.start()
-            try await driver.navigateTo(url: testPageURLString)
+            try await driver.navigateTo(urlString: testPageURLString)
 
             let button = try await driver
                 .findElement(.css(.id("button")))
@@ -81,7 +82,7 @@ class ChromeDriverElmentHandleTests: XCTestCase, WebPageTestable {
 
         do {
             try await driver.start()
-            try await driver.navigateTo(url: testPageURLString)
+            try await driver.navigateTo(urlString: testPageURLString)
 
             let inputElement = try await driver
                 .findElement(.css(.id("attribute")))
@@ -119,7 +120,7 @@ class ChromeDriverElmentHandleTests: XCTestCase, WebPageTestable {
 
         do {
             try await driver.start()
-            try await driver.navigateTo(url: testPageURLString)
+            try await driver.navigateTo(urlString: testPageURLString)
 
             let inputElement = try await driver
                 .findElement(.css(.id("clearInputValue")))
@@ -194,7 +195,7 @@ class ChromeDriverElmentHandleTests: XCTestCase, WebPageTestable {
 
         do {
             try await driver.start()
-            try await driver.navigateTo(url: testPageURLString)
+            try await driver.navigateTo(urlString: testPageURLString)
 
             let screenShot = try await driver.screenshot()
             let _ = screenShot.data(using: .utf8)

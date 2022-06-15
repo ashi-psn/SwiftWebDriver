@@ -12,7 +12,7 @@ class ChromeDriverFindElementTests: XCTestCase, WebPageTestable {
     
     var pageEndPoint: String = "index.html"
 
-    let chromeOption = ChromeOptions(args: [
+    let chromeOption = try! ChromeOptions(args: [
         Args(.headless),
     ])
 
