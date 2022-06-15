@@ -13,7 +13,7 @@ class ChromeDriverStartTests: XCTestCase, WebPageTestable {
     var pageEndPoint: String = ""
     
     
-    let chromeOption = ChromeOptions(args: [
+    let chromeOption = try! ChromeOptions(args: [
         Args(.headless),
     ])
     

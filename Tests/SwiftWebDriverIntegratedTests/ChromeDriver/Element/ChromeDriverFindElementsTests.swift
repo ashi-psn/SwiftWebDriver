@@ -12,7 +12,7 @@ class ChromeDriverFindElementsTests: XCTestCase, WebPageTestable {
     
     var pageEndPoint: String = "findElementsTestPage.html"
     
-    let chromeOption = ChromeOptions(args: [
+    let chromeOption = try! ChromeOptions(args: [
         Args(.headless),
     ])
     
@@ -41,7 +41,7 @@ class ChromeDriverFindElementsTests: XCTestCase, WebPageTestable {
         
         do {
             try await driver.start()
-            try await driver.navigateTo(url: testPageURLString)
+            try await driver.navigateTo(urlString: testPageURLString)
             
             let elements = try await driver.findElements(.css(.class("classElement1")))
             XCTAssertEqual(elements.count, 1)
@@ -91,7 +91,7 @@ class ChromeDriverFindElementsTests: XCTestCase, WebPageTestable {
         
         do {
             try await driver.start()
-            try await driver.navigateTo(url: testPageURLString)
+            try await driver.navigateTo(urlString: testPageURLString)
             
             let xpathElements = try await driver
                 .findElements(.xpath("/html/body/div"))
@@ -127,7 +127,7 @@ class ChromeDriverFindElementsTests: XCTestCase, WebPageTestable {
         
         do {
             try await driver.start()
-            try await driver.navigateTo(url: testPageURLString)
+            try await driver.navigateTo(urlString: testPageURLString)
             
             let linkElement1 = try await driver
                 .findElements(.linkText("1linkElement"))
@@ -171,7 +171,7 @@ class ChromeDriverFindElementsTests: XCTestCase, WebPageTestable {
         
         do {
             try await driver.start()
-            try await driver.navigateTo(url: testPageURLString)
+            try await driver.navigateTo(urlString: testPageURLString)
             
             let linkElement1 = try await driver
                 .findElements(.particalLinkText("1"))
@@ -213,7 +213,7 @@ class ChromeDriverFindElementsTests: XCTestCase, WebPageTestable {
         
         do {
             try await driver.start()
-            try await driver.navigateTo(url: testPageURLString)
+            try await driver.navigateTo(urlString: testPageURLString)
             
             let tagElement1 = try await driver
                 .findElements(.tagName("p"))

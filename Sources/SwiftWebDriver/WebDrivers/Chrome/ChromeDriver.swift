@@ -12,7 +12,6 @@ import AsyncHTTPClient
 
 public class ChromeDriver: Driver {
     
-    
     public typealias BrowserOption = ChromeOptions
     
     public var browserObject: ChromeOptions
@@ -37,196 +36,136 @@ public class ChromeDriver: Driver {
     
     @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     public func start() async throws -> String {
-        return try await start().get()
-    }
-    
-    public func start() -> EventLoopFuture<String> {
         let request = NewSessionRequest(baseURL: url, chromeOptions: browserObject)
-        return client.request(request).map { response in
+        return try await client.request(request).map { response in
             self.sessionId = response.value.sessionId
             return response.value.sessionId
-        }
+        }.get()
     }
     
     @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     public func stop() async throws -> String? {
-        return try await self.stop().get()
-    }
-    
-    public func stop() throws -> EventLoopFuture<String?> {
         guard let sessionId = sessionId else {
             throw WebDriverError.sessionIdisNil
         }
         let request = DeleteSessionRequest(baseURL: url, sessionId: sessionId)
-        return client.request(request).map{ response in
+        return try await client.request(request).map{ response in
             return response.value
-        }
+        }.get()
     }
     
     @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     public func status() async throws -> StatusResponse {
-        return try await status().get()
-    }
-    
-    public func status() -> EventLoopFuture<StatusResponse> {
         let request = StatusRequest(baseURL: url)
-        return client.request(request)
+        return try await client.request(request).get()
     }
     
     @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     public func getNavigation() async throws -> GetNavigationResponse {
-        return try await getNavigation().get()
-    }
-    
-    public func getNavigation() throws -> EventLoopFuture<GetNavigationResponse> {
         guard let sessionId = sessionId else {
             throw WebDriverError.sessionIdisNil
         }
         let request = GetNavigationRequest(baseURL: url, sessionId: sessionId)
-        return client.request(request)
+        return try await client.request(request).get()
     }
     
     @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     public func postNavigation(requestURL: String) async throws -> PostNavigationResponse {
-        return try await postNavigation(requestURL: requestURL).get()
-    }
-    
-    public func postNavigation(requestURL: String) throws -> EventLoopFuture<PostNavigationResponse> {
         guard let sessionId = sessionId else {
             throw WebDriverError.sessionIdisNil
         }
         let request = PostNavigationRequest(baseURL: url, sessionId: sessionId, requestURL: requestURL)
-        return client.request(request)
+        return try await client.request(request).get()
     }
     
     @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     public func postNavigationBack() async throws -> PostNavigationBackResponse {
-        return try await postNavigationBack().get()
-    }
-    
-    public func postNavigationBack() throws -> EventLoopFuture<PostNavigationBackResponse> {
         guard let sessionId = sessionId else {
             throw WebDriverError.sessionIdisNil
         }
         let request = PostNavigationBackRequest(baseURL: url, sessionId: sessionId)
-        return client.request(request)
+        return try await client.request(request).get()
     }
     
     @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     public func postNavigationForward() async throws -> PostNavigationForwardResponse {
-        return try await postNavigationForward().get()
-    }
-    
-    public func postNavigationForward() throws -> EventLoopFuture<PostNavigationForwardResponse> {
         guard let sessionId = sessionId else {
             throw WebDriverError.sessionIdisNil
         }
         let request = PostNavigationForwardRequest(baseURL: url, sessionId: sessionId)
-        return client.request(request)
+        return try await client.request(request).get()
     }
     
     @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     public func postNavigationRefresh() async throws -> PostNavigationRefreshResponse {
-        return try await postNavigationRefresh().get()
-    }
-    
-    public func postNavigationRefresh() throws -> EventLoopFuture<PostNavigationRefreshResponse> {
         guard let sessionId = sessionId else {
             throw WebDriverError.sessionIdisNil
         }
         let request = PostNavigationRefreshRequest(baseURL: url, sessionId: sessionId)
-        return client.request(request)
+        return try await client.request(request).get()
     }
     
     @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     public func getNavigationTitle() async throws -> GetNavigationTitleResponse {
-        return try await getNavigationTitle().get()
-    }
-    
-    public func getNavigationTitle() throws -> EventLoopFuture<GetNavigationTitleResponse> {
         guard let sessionId = sessionId else {
             throw WebDriverError.sessionIdisNil
         }
         let request = GetNavigationTitleRequest(baseURL: url, sessionId: sessionId)
-        return client.request(request)
+        return try await client.request(request).get()
     }
     
     @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     public func postElement(locatorSelector: LocatorSelector) async throws -> PostElementResponse {
-        return try await postElement(locatorSelector: locatorSelector)
-    }
-    
-    public func postElement(locatorSelector: LocatorSelector) throws -> EventLoopFuture<PostElementResponse> {
         guard let sessionId = sessionId else {
             throw WebDriverError.sessionIdisNil
         }
         let request = PostElementRequest(baseURL: url, sessionId: sessionId, cssSelector: locatorSelector)
-        return client.request(request)
+        return try await client.request(request).get()
     }
     
     @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     public func postElements(locatorSelector: LocatorSelector) async throws -> PostElementsResponse {
-        return try await postElements(locatorSelector: locatorSelector)
-    }
-    
-    public func postElements(locatorSelector: LocatorSelector) throws -> EventLoopFuture<PostElementsResponse> {
         guard let sessionId = sessionId else {
             throw WebDriverError.sessionIdisNil
         }
         let request = PostElementsRequest(baseURL: url, sessionId: sessionId, cssSelector: locatorSelector)
-        return client.request(request)
+        return try await client.request(request).get()
     }
     
     @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     public func postElementByElementId(locatorSelector: LocatorSelector, elementId: String) async throws -> PostElementByIdResponse {
-        return try await postElementByElementId(locatorSelector: locatorSelector, elementId: elementId)
-    }
-    
-    public func postElementByElementId(locatorSelector: LocatorSelector, elementId: String) throws -> EventLoopFuture<PostElementByIdResponse> {
         guard let sessionId = sessionId else {
             throw WebDriverError.sessionIdisNil
         }
         let request = PostElementByIdRequest(baseURL: url, sessionId: sessionId, elementId: elementId, cssSelector: locatorSelector)
-        return client.request(request)
-    }
-    
-    func postElementsByElementId(locatorSelector: LocatorSelector, elementId: String) throws -> EventLoopFuture<PostElementsByIdResponse> {
-        guard let sessionId = sessionId else {
-            throw WebDriverError.sessionIdisNil
-        }
-        let request = PostElementsByIdRequest(baseURL: url, sessionId: sessionId, elementId: elementId, cssSelector: locatorSelector)
-        return client.request(request)
+        return try await client.request(request).get()
     }
     
     @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     func postElementsByElementId(locatorSelector: LocatorSelector, elementId: String) async throws -> PostElementsByIdResponse {
-        return try await postElementsByElementId(locatorSelector: locatorSelector, elementId: elementId)
+        guard let sessionId = sessionId else {
+            throw WebDriverError.sessionIdisNil
+        }
+        let request = PostElementsByIdRequest(baseURL: url, sessionId: sessionId, elementId: elementId, cssSelector: locatorSelector)
+        return try await client.request(request).get()
     }
     
     @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     func getElementText(elementId: String) async throws -> GetElementTextResponse {
-        return try await getElementText(elementId: elementId)
-    }
-    
-    func getElementText(elementId: String) throws -> EventLoopFuture<GetElementTextResponse> {
         guard let sessionId = sessionId else {
             throw WebDriverError.sessionIdisNil
         }
         let request = GetElementTextRequest(baseURL: url, sessionId: sessionId, elementId: elementId)
-        return client.request(request)
+        return try await client.request(request).get()
     }
     
     @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     func getElementName(elementId: String) async throws -> GetElementNameResponse {
-        return try await getElementName(elementId: elementId)
-    }
-    
-    func getElementName(elementId: String) throws -> EventLoopFuture<GetElementNameResponse> {
         guard let sessionId = sessionId else {
             throw WebDriverError.sessionIdisNil
         }
         let request = GetElementNameRequest(baseURL: url, sessionId: sessionId, elementId: elementId)
-        return client.request(request)
+        return try await client.request(request).get()
     }
     
     @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)

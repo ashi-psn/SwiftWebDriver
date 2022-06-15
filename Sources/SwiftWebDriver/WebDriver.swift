@@ -28,13 +28,6 @@ public class WebDriver<T: Driver> {
         return result
     }
 
-    @discardableResult
-    /// webdriver start method
-    /// - Returns: session id
-    public func start() throws -> EventLoopFuture<String> {
-        return  driver.start()
-    }
-
     /// webdriver stop method
     /// - Returns: nil
     @discardableResult
@@ -43,14 +36,6 @@ public class WebDriver<T: Driver> {
         return try await driver.stop()
     }
 
-    
-    
-    /// webdriver stop method
-    /// - Returns: nil
-    @discardableResult
-    public func stop() throws -> EventLoopFuture<String?> {
-        return try driver.stop()
-    }
 
     
     /// webdriver status
@@ -61,27 +46,9 @@ public class WebDriver<T: Driver> {
     }
 
     
-    /// webdriver status
-    /// - Returns: StatusResponse
-    public func status() throws -> EventLoopFuture<StatusResponse> {
-        return driver.status()
-    }
-    
-    public func getNavigation() throws -> EventLoopFuture<GetNavigationResponse> {
-        return try driver.getNavigation()
-    }
-    
     @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     public func getNavigation() async throws -> GetNavigationResponse {
-        return try await getNavigation().get()
-    }
-    
-    /// load Page
-    /// - Parameter url: load page url
-    /// - Returns: EventLoopFuture<PostNavigationResponse>
-    @discardableResult
-    public func navigateTo(url: String) throws -> EventLoopFuture<PostNavigationResponse> {
-        return try driver.postNavigation(requestURL: url)
+        return try await driver.getNavigation()
     }
     
     
@@ -90,61 +57,44 @@ public class WebDriver<T: Driver> {
     /// - Returns: PostNavigationResponse
     @discardableResult
     @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-    public func navigateTo(url: String) async throws -> PostNavigationResponse {
-        return try await navigateTo(url: url).get()
+    public func navigateTo(urlString: String) async throws -> PostNavigationResponse {
+        return try await driver.postNavigation(requestURL: urlString)
     }
     
     @discardableResult
     public func navigateTo(url: URL) async throws -> PostNavigationResponse {
-        return try await navigateTo(url: url.absoluteString).get()
+        return try await navigateTo(urlString: url.absoluteString)
     }
     
     
     /// navigation back
-    /// - Returns: EventLoopFuture<PostNavigationBackResponse>
-    public func navigationBack() throws -> EventLoopFuture<PostNavigationBackResponse> {
-        return try driver.postNavigationBack()
-    }
-    
-    /// navigation back
-    /// - Returns: EventLoopFuture<PostNavigationBackResponse>
+    /// - Returns: PostNavigationBackResponse
     @discardableResult
     @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     public func navigationBack() async throws -> PostNavigationBackResponse {
-        return try await driver.postNavigationBack().get()
+        return try await driver.postNavigationBack()
     }
     
-    /// navigation forward
-    /// - Returns: EventLoopFuture<PostNavigationForwardResponse>
-    public func navigatonForward() throws -> EventLoopFuture<PostNavigationForwardResponse> {
-        return try driver.postNavigationForward()
-    }
     
     /// navigation forward
-    /// - Returns: EventLoopFuture<PostNavigationForwardResponse>
+    /// - Returns: PostNavigationForwardResponse<PostNavigationForwardResponse>
     @discardableResult
     @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     public func navigatonForward() async throws -> PostNavigationForwardResponse {
-        return try await navigatonForward().get()
+        return try await driver.postNavigationForward()
     }
     
-    public func navigatonRefresh() throws -> EventLoopFuture<PostNavigationRefreshResponse> {
-        return try driver.postNavigationRefresh()
-    }
     
     @discardableResult
     @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     public func navigatonRefresh() async throws -> PostNavigationRefreshResponse {
-        return try await navigatonRefresh().get()
+        return try await driver.postNavigationRefresh()
     }
     
-    public func navigationTitle() throws -> EventLoopFuture<GetNavigationTitleResponse> {
-        return try driver.getNavigationTitle()
-    }
     
     @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     public func navigationTitle() async throws -> GetNavigationTitleResponse {
-        return try await navigationTitle().get()
+        return try await driver.getNavigationTitle()
     }
     
     @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
