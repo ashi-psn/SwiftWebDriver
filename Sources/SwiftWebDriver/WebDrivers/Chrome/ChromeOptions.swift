@@ -24,7 +24,7 @@ public extension Args {
         self.init(describing: args)
     }
     
-    enum Arguments: CustomStringConvertible, Codable {
+    public enum Arguments: CustomStringConvertible, Codable {
         case headless
         case noSandbox
         case disableGPU

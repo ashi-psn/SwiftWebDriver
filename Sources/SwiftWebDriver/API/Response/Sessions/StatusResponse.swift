@@ -8,10 +8,10 @@
 import Foundation
 
 public struct StatusResponse: Codable {
-    let value: Value
+    public let value: Value
     
-    struct Value: Codable {
-        let ready: Bool
-        let message: String
+    public struct Value: Codable {
+        public let ready: Bool
+        public let message: String
     }
 }
