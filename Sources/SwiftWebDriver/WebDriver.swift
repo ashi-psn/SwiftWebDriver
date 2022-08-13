@@ -113,6 +113,7 @@ public class WebDriver<T: Driver> {
     }
     
     @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+    @discardableResult
     public func waitUntil(_ locatorType: LocatorType, retryCount: Int = 3, durationSeconds: Int = 1) async throws -> Bool {
         return try await driver.waitUntil(locatorType, retryCount: retryCount, durationSeconds: durationSeconds)
     }
