@@ -11,6 +11,7 @@ import NIO
 public protocol FindElementProtocol {
     func findElement(_ locatorType: LocatorType) async throws -> Element
     func findElements(_ locatorType: LocatorType) async throws -> Elements
+    func waitUntil(_ locatorType: LocatorType, retryCount: Int, durationSeconds: Int) async throws -> Bool
 }
 
 public protocol ElementCommandProtocol: FindElementProtocol {
@@ -96,5 +97,30 @@ public struct Element: ElementCommandProtocol {
         let request = GetElementScreenShotRequest(baseURL: baseURL, sessionId: sessionId, elementId: elementId)
         let response = try await APIClient.shared.request(request)
         return response.value
+    }
+    
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+    @discardableResult
+    public func waitUntil(_ locatorType: LocatorType, retryCount: Int = 3, durationSeconds: Int = 1) async throws -> Bool {
+        
+        do {
+            let _ = try await findElement(locatorType)
+            return true
+        } catch let error {
+            guard
+                retryCount > 0,
+                let error = error as? SeleniumError
+                else { return false }
+            
+            guard error.value.error == "no such element" else {
+                return false
+            }
+            
+            let retryCount = retryCount - 1
+            
+            sleep(UInt32(durationSeconds))
+            
+            return try await waitUntil(locatorType, retryCount: retryCount, durationSeconds: durationSeconds)
+        }
     }
 }
