@@ -11,10 +11,10 @@ This library allows you to work with selenium webdriver on server-side swift
 ## Getting Started
 Adding the dependency
 
-Add the following entry in your Package.swift to start using HTTPClient:
+Add the following entry in your Package.swift to start using SwiftWebDriver:
 
 ```swift
-.package(url: "https://github.com/ashi-psn/SwiftWebDriver.git", from: "0.1.0")
+.package(url: "https://github.com/ashi-psn/SwiftWebDriver.git", from: "0.1.1")
 ```
 
 and add dependency to your target:
