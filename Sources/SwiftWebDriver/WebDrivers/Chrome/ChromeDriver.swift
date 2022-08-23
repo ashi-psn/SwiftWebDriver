@@ -201,6 +201,7 @@ public class ChromeDriver: Driver {
     }
     
     @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+    @discardableResult
     public func waitUntil(_ locatorType: LocatorType, retryCount: Int = 3, durationSeconds: Int = 1) async throws -> Bool {
         
         guard let sessionId = sessionId else {
